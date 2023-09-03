@@ -1,5 +1,6 @@
 Recipe Converter
 ===
+[![pipeline status](https://gitlab.com/BreD1810/recipe-converter/badges/main/pipeline.svg)](https://gitlab.com/BreD1810/recipe-converter/-/commits/main)
 
 Converts online recipes to a markdown format to be saved as a note.
 
