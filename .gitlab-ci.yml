@@ -1,0 +1,31 @@
+stages:
+    - quality
+    - build
+
+.go-cache:
+    variables:
+        GOPATH: $CI_PROJECT_DIR/.go
+    cache:
+      paths:
+        - .go/pkg/mod/
+
+lint:
+  stage: quality
+  image: golangci/golangci-lint
+  script:
+    - golangci-lint run -v --color=always
+
+unit_tests:
+    stage: quality
+    image: golang
+    script:
+        - go test -v -race ./... -coverprofile .goCoverage.txt
+
+build-cli:
+    stage: build
+    image: golang
+    script:
+        - env GOOS=linux GOARCH=amd64 go build -o output-amd64-cli ./cmd/convert-recipe
+    artifacts:
+        paths:
+            - output-amd64-cli
